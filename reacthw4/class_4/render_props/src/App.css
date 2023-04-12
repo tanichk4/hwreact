@@ -1,0 +1,12 @@
+.container {
+    position: relative;
+    height: 100vh;
+    width: 100vh;
+}
+
+.cat {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-color: tomato;
+}
