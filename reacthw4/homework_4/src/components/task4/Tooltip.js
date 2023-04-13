@@ -1,4 +1,4 @@
-const Tooltip = ({ x, y, content: product }) => {
+const Tooltip = ({ x, y, content: product}) => {
   const styles = {
     position: "absolute",
     top: y + 10,

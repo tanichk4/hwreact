@@ -2,6 +2,7 @@ import Tooltip from "./Tooltip";
 import { useState } from "react";
 
 const ProductCard = ({ product, render }) => {
+  
   const [isTooltipShown, setIsTooltipShown] = useState(false);
   const [tooltipX, setTooltipX] = useState(0);
   const [tooltipY, setTooltipY] = useState(0);
