@@ -65,7 +65,6 @@ export const InfoTitle = styled.h2`
 
 export const CardContainer = styled.div`
   z-index: auto;
-  position: relative;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -80,9 +79,19 @@ export const CardContainer = styled.div`
 `;
 
 export const CardItems = styled.div`
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  margin: 85px 53px 37px 55px;
+  position: relative;
+  padding: 85px 53px 37px 55px;
+  width: 534px;
+  height: 334px;
+  background-color: grey;
+  border-radius: 48.6px;
+
+  &:not(:last-child) {
+    margin-bottom: 90px;
+  }
 `;
 
 export const CardChip = styled.div`
@@ -97,7 +106,13 @@ export const CardNumberContainer = styled.div`
   line-height: 38px;
   letter-spacing: 4.17391px;
 `;
-export const CardNumber = styled.p``;
+
+export const CardNumber = styled.p`
+/* transform: translateY(100%);
+bottom: 0;
+position: absolute; */
+
+`;
 
 export const CardHolderAndTypeContainer = styled.div`
   z-index: 10;
@@ -133,7 +148,6 @@ export const ButtonsContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: stretch;
-  margin: 0 auto;
   width: 520px;
   height: 150px;
   border-radius: 48.6px;
@@ -145,17 +159,15 @@ export const ButtonsContainer = styled.div`
 `;
 
 export const Button = styled.button`
+
   position: relative;
   border: none;
   background-color: transparent;
-  margin: 85px 0 15px;
-  padding: 0 25px;
+  /* padding: 0 25px; */
   background-size: contain;
   background-repeat: no-repeat;
   cursor: pointer;
   img {
-    width: 100%;
-    height: 100%;
     z-index: -1;
   }
 
