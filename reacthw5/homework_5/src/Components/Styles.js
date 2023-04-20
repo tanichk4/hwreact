@@ -78,11 +78,18 @@ export const CardContainer = styled.div`
   }
 `;
 
+export const ButtonContainer = styled.div`
+
+  position: absolute;
+  z-index: 9;
+`;
+
 export const CardItems = styled.div`
+  z-index: 99;
+  position: relative;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  position: relative;
   padding: 85px 53px 37px 55px;
   width: 534px;
   height: 334px;
@@ -108,10 +115,9 @@ export const CardNumberContainer = styled.div`
 `;
 
 export const CardNumber = styled.p`
-/* transform: translateY(100%);
+  /* transform: translateY(100%);
 bottom: 0;
 position: absolute; */
-
 `;
 
 export const CardHolderAndTypeContainer = styled.div`
@@ -142,9 +148,9 @@ const moveDown = keyframes`
 
 export const ButtonsContainer = styled.div`
   position: absolute;
-  z-index: ${({ zIndex }) => zIndex || "auto"};
-  top: ${({ top }) => top || 0};
-  left: ${({ left }) => left || "5.7px"};
+  /* top: ${({ top }) => top || 0}; */
+  left: ${({ left }) => left || "6px"}; 
+  bottom: ${({ bottom }) => bottom || 0};
   display: flex;
   justify-content: space-evenly;
   align-items: stretch;
@@ -159,11 +165,11 @@ export const ButtonsContainer = styled.div`
 `;
 
 export const Button = styled.button`
-
   position: relative;
   border: none;
   background-color: transparent;
-  /* padding: 0 25px; */
+  align-self: self-end;
+  margin-bottom: 15px;
   background-size: contain;
   background-repeat: no-repeat;
   cursor: pointer;
