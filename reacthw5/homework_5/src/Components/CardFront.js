@@ -3,18 +3,20 @@ import Buttons from "./Buttons.js";
 import HideDigits from "./HideDigits.js";
 import CardImg from "./CardImg.js";
 import {
-  CardContainer,
   ButtonContainer,
-  CardItems,
+
+  CardItemsFront,
   CardHolderAndTypeContainer,
   CardHolder,
   CardType,
   CardChip,
   CardNumberContainer,
   CardNumber,
-} from "./Styles";
+  SideBack,
+  SideFront
+} from "./Styles.js";
 
-const Card = ({ cardData, cardHolder }) => {
+const CardFront = ({ cardData, cardHolder }) => {
   const [showCardNumber, setShowCardNumber] = useState(false);
   const [isCardClicked, setIsCardClicked] = useState(false);
 
@@ -23,67 +25,33 @@ const Card = ({ cardData, cardHolder }) => {
   };
 
   return (
-    // <CardContainer onClick={handleCardClick}>
-    //   {isCardClicked && (
-    //     <Buttons
-
-    //       top="260px"
-    //       // zIndex={-10} />}
-    //       zIndex={10}
-    //     />
-    //   )}
-    //   <CardItems>
-
-    //     <CardChip />
-    //     <CardNumberContainer>
-    //       <CardNumber>
-    //         <HideDigits
-    //           inputString={cardData.card.numbers}
-    //           showNumber={showCardNumber}
-    //         />
-    //       </CardNumber>
-    //     </CardNumberContainer>
-    //     <CardHolderAndTypeContainer>
-    //       <CardHolder>{cardHolder}</CardHolder>
-    //       <CardType>
-    //         <CardImg cardData={cardData} />
-    //       </CardType>
-    //     </CardHolderAndTypeContainer>
-    //   </CardItems>
-    // </CardContainer>
-    // <CardContainer onClick={handleCardClick}>
-    // {isCardClicked && (
-    // <Buttons
-
-    // top="260px"
-    // zIndex={-10} />}
-    // zIndex={10}
-    // />
-    // )}
-    <CardContainer onClick={handleCardClick}>
-      <CardItems>
-        {/* {isCardClicked && <Buttons top="260px" zIndex={10} />} */}
-        <CardChip />
-        <CardNumberContainer>
-          <CardNumber>
-            <HideDigits
-              inputString={cardData.card.numbers}
-              showNumber={showCardNumber}
-            />
-          </CardNumber>
-        </CardNumberContainer>
-        <CardHolderAndTypeContainer>
-          <CardHolder>{cardHolder}</CardHolder>
-          <CardType>
-            <CardImg cardData={cardData} />
-          </CardType>
-        </CardHolderAndTypeContainer>
-      </CardItems>
-      <ButtonContainer>
-        {isCardClicked && <Buttons bottom='-400px'/>}
-      </ButtonContainer>
-    </CardContainer>
+    // ТУТ МАЄ БУТИ І ФРОНТ І БЕК ЗАПИСАНИЙ В ЯКОГО ПЕРЕДАЄВАТИМУТЬСЯ ПРОПСИ З ФАЙЛУ YourCards
+    // ЩО НАПИСАНО ВНИЗУ МОЖЛИВО ПОТРІБНО ВИНЕСТИ В ОКРЕМИЙ КОМПОНЕНТ ДЕ ПРОПИСАНИЙ КАРД ФРОНТ (АЛЕ Я ОТ НЕ ЗНАЮ ЯК ІЗ ПЕРЕДАЧЕЮ ПРОПСІВ)
+    <div>
+      <SideFront onClick={handleCardClick}>
+        <CardItemsFront>
+          <CardChip />
+          <CardNumberContainer>
+            <CardNumber>
+              <HideDigits
+                inputString={cardData.card.numbers}
+                showNumber={showCardNumber}
+              />
+            </CardNumber>
+          </CardNumberContainer>
+          <CardHolderAndTypeContainer>
+            <CardHolder>{cardHolder}</CardHolder>
+            <CardType>
+              <CardImg cardData={cardData} />
+            </CardType>
+          </CardHolderAndTypeContainer>
+        </CardItemsFront>
+        <ButtonContainer>
+          {isCardClicked && <Buttons bottom="" />}
+        </ButtonContainer>
+      </SideFront>
+    </div>
   );
 };
 
-export default Card;
+export default CardFront;

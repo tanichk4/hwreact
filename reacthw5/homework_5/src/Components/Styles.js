@@ -63,42 +63,12 @@ export const InfoTitle = styled.h2`
   margin: auto 0;
 `;
 
-export const CardContainer = styled.div`
-  z-index: auto;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 534px;
-  height: 334px;
-  background-color: grey;
-  border-radius: 48.6px;
-
-  &:not(:last-child) {
-    margin-bottom: 90px;
-  }
-`;
-
 export const ButtonContainer = styled.div`
-
   position: absolute;
   z-index: 9;
-`;
 
-export const CardItems = styled.div`
-  z-index: 99;
-  position: relative;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  padding: 85px 53px 37px 55px;
-  width: 534px;
-  height: 334px;
-  background-color: grey;
-  border-radius: 48.6px;
-
-  &:not(:last-child) {
-    margin-bottom: 90px;
-  }
+  transform: translateY(100%);
+  bottom: -100px;
 `;
 
 export const CardChip = styled.div`
@@ -149,13 +119,13 @@ const moveDown = keyframes`
 export const ButtonsContainer = styled.div`
   position: absolute;
   /* top: ${({ top }) => top || 0}; */
-  left: ${({ left }) => left || "6px"}; 
-  bottom: ${({ bottom }) => bottom || 0};
+  left: ${({ left }) => left || "6px"};
+  bottom: ${({ bottom }) => bottom || "25px"};
   display: flex;
   justify-content: space-evenly;
   align-items: stretch;
   width: 520px;
-  height: 150px;
+  height: 100px;
   border-radius: 48.6px;
   background-color: #dcdce3;
 
@@ -187,5 +157,104 @@ export const Button = styled.button`
       border-bottom: 3px solid red;
       transform: rotate(-45deg);
     }
+  }
+`;
+
+// ///////
+
+export const CardItemsFront = styled.div`
+  z-index: 99;
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: 85px 53px 37px 55px;
+  width: 534px;
+  height: 334px;
+  background-color: grey;
+  /* ТРЕБА ПЕРЕНЕСТИ НА ВСЕ ЩОБ НЕ ЗАВАЖАВ КОЛІР ЗАДНІЙ СТОРОНІ */
+  border-radius: 48.6px;
+
+  &:not(:last-child) {
+    margin-bottom: 90px;
+  }
+`;
+
+export const CardItemsBack = styled.div`
+  z-index: 99;
+  position: relative;
+  box-sizing: border-box;
+  padding: 85px 53px 37px 55px;
+  width: 534px;
+  height: 334px;
+  /* background-color: grey; */
+  /* ТРЕБА ПЕРЕНЕСТИ НА ВСЕ ЩОБ НЕ ЗАВАЖАВ КОЛІР ЗАДНІЙ СТОРОНІ */
+  border-radius: 48.6px;
+  overflow: hidden;
+
+  &:after {
+    content: " ";
+
+    position: absolute;
+    width: 534px;
+    height: 63px;
+    left: 0px;
+    top: 32px;
+
+    background: #161039;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 90px;
+  }
+`;
+
+export const CardDataBack = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 132px 0 67px 0;
+  font-size: 30px;
+  line-height: 38px;
+  letter-spacing: 4.17391px;
+`;
+
+export const Sides = styled.div`
+  z-index: auto;
+
+  position: relative;
+  /* background-color: grey; */
+  border-radius: 48.6px;
+
+  &:not(:last-child) {
+    margin-bottom: 90px;
+  }
+
+  /* ЗАГАЛЬНА СТИЛІЗАЦІЯ В ЯКУ НЕ ПРОПИСУЄМО СТИЛІ ДЛЯ ОКРЕМОЇ КАРТОЧКИ */
+`;
+
+export const SideFront = styled(Sides)`
+  background-color: grey;
+`;
+
+export const SideBack = styled(Sides)`
+  /* transform: rotateY(180deg); */
+  background-color: red;
+`;
+
+export const CardContainer = styled.div`
+  box-sizing: border-box;
+  width: 534px;
+  height: 334px;
+  position: relative;
+  perspective: 1000px;
+
+  &:hover > ${SideFront} {
+    /* //т.ч. звертаємось до створеного за допомогою styled-components компонента, який буде розміщений в середині іншого компонента */
+    transform: rotateY(180deg);
+  }
+
+  &:hover > ${SideBack} {
+    transform: rotateY(360deg);
   }
 `;
