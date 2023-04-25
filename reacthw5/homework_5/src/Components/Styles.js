@@ -219,28 +219,51 @@ export const CardDataBack = styled.div`
   letter-spacing: 4.17391px;
 `;
 
-export const Sides = styled.div`
-  z-index: auto;
+// export const Sides = styled.div`
+//   z-index: auto;
 
-  position: relative;
-  /* background-color: grey; */
-  border-radius: 48.6px;
+//   position: relative;
+//   /* background-color: grey; */
+//   border-radius: 48.6px;
+//   backface-visibility: hidden;
+//   &:not(:last-child) {
+//     margin-bottom: 90px;
+//   }
 
-  &:not(:last-child) {
-    margin-bottom: 90px;
-  }
+//   ${({ isBack }) =>
+//     isBack &&
+//     `
+//     transform: rotateY(180deg);
+//   `}/* ЗАГАЛЬНА СТИЛІЗАЦІЯ В ЯКУ НЕ ПРОПИСУЄМО СТИЛІ ДЛЯ ОКРЕМОЇ КАРТОЧКИ */
+// `;
 
-  /* ЗАГАЛЬНА СТИЛІЗАЦІЯ В ЯКУ НЕ ПРОПИСУЄМО СТИЛІ ДЛЯ ОКРЕМОЇ КАРТОЧКИ */
-`;
+// export const SideFront = styled(Sides)`
+//   background-color: grey;
+// `;
 
-export const SideFront = styled(Sides)`
-  background-color: grey;
-`;
+// export const SideBack = styled(Sides)`
+//   background-color: red;
+// `;
 
-export const SideBack = styled(Sides)`
-  /* transform: rotateY(180deg); */
-  background-color: red;
-`;
+// export const CardContainer = styled.div`
+//   box-sizing: border-box;
+//   width: 534px;
+//   height: 334px;
+//   position: relative;
+//   perspective: 1000px;
+// `;
+
+// export const OneCard = styled.div`
+//   position: relative;
+//   transition: transform 0.6s;
+//   transform-style: preserve-3d;
+
+//   ${({ flipped }) =>
+//     flipped &&
+//     `
+//   transform: rotateX(180deg);
+// `}
+// `;
 
 export const CardContainer = styled.div`
   box-sizing: border-box;
@@ -248,13 +271,48 @@ export const CardContainer = styled.div`
   height: 334px;
   position: relative;
   perspective: 1000px;
+`;
 
-  &:hover > ${SideFront} {
-    /* //т.ч. звертаємось до створеного за допомогою styled-components компонента, який буде розміщений в середині іншого компонента */
+export const OneCard = styled.div`
+  width: 300px;
+  height: 200px;
+  position: relative;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+
+  ${({ flipped }) =>
+    flipped &&
+    `
     transform: rotateY(180deg);
-  }
+  `}
+`;
 
-  &:hover > ${SideBack} {
-    transform: rotateY(360deg);
+export const Sides = styled.div`
+  position: absolute;
+  backface-visibility: hidden;
+
+  ${({ isBack }) =>
+    isBack &&
+    `
+    transform: rotateY(180deg);
+  `}
+
+  z-index: auto;
+
+  position: relative;
+  /* background-color: grey; */
+  border-radius: 48.6px;
+  backface-visibility: hidden;
+  &:not(:last-child) {
+    margin-bottom: 90px;
   }
+`;
+
+export const SideFront = styled(Sides)`
+  background-color: #f8f8f8;
+`;
+
+export const SideBack = styled(Sides)`
+  background-color: #ccc;
+  transform: rotateY(180deg);
 `;
