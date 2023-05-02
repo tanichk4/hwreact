@@ -10,31 +10,6 @@ export const PageContainer = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 57px 70px 266px 70px;
-
-  @media only screen and (min-width: 420px) {
-    max-width: 420px;
-    padding: 57px 40px 266px 40px;
-  }
-
-  @media only screen and (min-width: 768px) {
-    max-width: 768px;
-    padding: 57px 70px 266px 70px;
-  }
-
-  @media only screen and (min-width: 1024px) {
-    max-width: 1024px;
-    padding: 57px 100px 266px 100px;
-  }
-
-  @media only screen and (min-width: 1200px) {
-    max-width: 1200px;
-    padding: 57px 120px 266px 120px;
-  }
-
-  @media only screen and (min-width: 1440px) {
-    max-width: 1440px;
-    padding: 57px 140px 266px 120px;
-  }
 `;
 
 export const InfoContainer = styled.div`
@@ -63,75 +38,33 @@ export const InfoTitle = styled.h2`
   margin: auto 0;
 `;
 
-export const ButtonContainer = styled.div`
-  position: absolute;
-  z-index: 9;
-
-  transform: translateY(100%);
-  bottom: -100px;
+export const HiddenNumbers = styled.p`
+  display: ${({ show }) => (show ? "block" : "none")};
 `;
 
-export const CardChip = styled.div`
-  background-image: url("/chip.svg");
-  fill: grey;
-  background-size: cover;
-  width: 69.6px;
-  height: 56.23px;
-`;
-export const CardNumberContainer = styled.div`
-  font-size: 30px;
-  line-height: 38px;
-  letter-spacing: 4.17391px;
-`;
-
-export const CardNumber = styled.p`
-  /* transform: translateY(100%);
-bottom: 0;
-position: absolute; */
-`;
-
-export const CardHolderAndTypeContainer = styled.div`
-  z-index: 10;
-  height: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-export const CardHolder = styled.p`
-  font-size: 24px;
-  line-height: 31px;
-  letter-spacing: 2.4px;
-`;
-
-//переробити на div з картинкою
-export const CardType = styled.p``;
-
-const moveDown = keyframes`
+const slideInAnimation = keyframes`
   from {
-    transform: translateY(-80px);
+    transform: translateY(-40px);
   }
+
   to {
     transform: translateY(0);
   }
 `;
 
-export const ButtonsContainer = styled.div`
+export const ButtonContainer = styled.div`
+  z-index: -1;
+  bottom: -70px;
   position: absolute;
-  /* top: ${({ top }) => top || 0}; */
-  left: ${({ left }) => left || "6px"};
-  bottom: ${({ bottom }) => bottom || "25px"};
   display: flex;
   justify-content: space-evenly;
   align-items: stretch;
-  width: 520px;
+  width: 534px;
   height: 100px;
   border-radius: 48.6px;
   background-color: #dcdce3;
+  animation: ${slideInAnimation} 0.5s ease-out;
 
-  animation-name: ${moveDown};
-  animation-duration: 1s;
-  animation-fill-mode: forwards;
 `;
 
 export const Button = styled.button`
@@ -143,8 +76,9 @@ export const Button = styled.button`
   background-size: contain;
   background-repeat: no-repeat;
   cursor: pointer;
+
   img {
-    z-index: -1;
+    /* z-index: -1; */
   }
 
   &:first-child {
@@ -154,165 +88,74 @@ export const Button = styled.button`
       bottom: 50%;
       left: 0;
       width: 100%;
-      border-bottom: 3px solid red;
+      border-bottom: 3px solid black;
       transform: rotate(-45deg);
     }
   }
 `;
 
-// ///////
-
-export const CardItemsFront = styled.div`
-  z-index: 99;
-  position: relative;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  padding: 85px 53px 37px 55px;
-  width: 534px;
-  height: 334px;
-  background-color: grey;
-  /* ТРЕБА ПЕРЕНЕСТИ НА ВСЕ ЩОБ НЕ ЗАВАЖАВ КОЛІР ЗАДНІЙ СТОРОНІ */
-  border-radius: 48.6px;
-
-  &:not(:last-child) {
-    margin-bottom: 90px;
-  }
+export const ButtonVisibility = styled(Button)`
+  background-image: url("/view.svg");
+  background-size: cover;
+  width: 46px;
+  height: 46px;
 `;
 
-export const CardItemsBack = styled.div`
-  z-index: 99;
-  position: relative;
-  box-sizing: border-box;
-  padding: 85px 53px 37px 55px;
-  width: 534px;
-  height: 334px;
-  /* background-color: grey; */
-  /* ТРЕБА ПЕРЕНЕСТИ НА ВСЕ ЩОБ НЕ ЗАВАЖАВ КОЛІР ЗАДНІЙ СТОРОНІ */
-  border-radius: 48.6px;
-  overflow: hidden;
-
-  &:after {
-    content: " ";
-
-    position: absolute;
-    width: 534px;
-    height: 63px;
-    left: 0px;
-    top: 32px;
-
-    background: #161039;
-  }
-
-  &:not(:last-child) {
-    margin-bottom: 90px;
-  }
+export const ButtonStatistics = styled(Button)`
+  background-image: url("/statistics.svg");
+  background-size: cover;
+  width: 46px;
+  height: 46px;
 `;
 
-export const CardDataBack = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 132px 0 67px 0;
+export const ButtonFlip = styled(Button)`
+  background-image: url("/flip.svg");
+  background-size: cover;
+  width: 46px;
+  height: 46px;
+`;
+
+export const CardChip = styled.div`
+  background-image: url("/chip.svg");
+  background-size: cover;
+  width: 69.6px;
+  height: 56.23px;
+  /* position: absolute;
+  left: 56.4px;
+  top: 85px; */
+`;
+export const CardNumberContainer = styled.div`
   font-size: 30px;
   line-height: 38px;
   letter-spacing: 4.17391px;
 `;
 
-// export const Sides = styled.div`
-//   z-index: auto;
+export const LogoContainer = styled.div`
+  /* position: absolute;
+  left: 411.6px;
+  top: calc(50% - 31px/2 + 85.63px); */
 
-//   position: relative;
-//   /* background-color: grey; */
-//   border-radius: 48.6px;
-//   backface-visibility: hidden;
-//   &:not(:last-child) {
-//     margin-bottom: 90px;
-//   }
-
-//   ${({ isBack }) =>
-//     isBack &&
-//     `
-//     transform: rotateY(180deg);
-//   `}/* ЗАГАЛЬНА СТИЛІЗАЦІЯ В ЯКУ НЕ ПРОПИСУЄМО СТИЛІ ДЛЯ ОКРЕМОЇ КАРТОЧКИ */
-// `;
-
-// export const SideFront = styled(Sides)`
-//   background-color: grey;
-// `;
-
-// export const SideBack = styled(Sides)`
-//   background-color: red;
-// `;
-
-// export const CardContainer = styled.div`
-//   box-sizing: border-box;
-//   width: 534px;
-//   height: 334px;
-//   position: relative;
-//   perspective: 1000px;
-// `;
-
-// export const OneCard = styled.div`
-//   position: relative;
-//   transition: transform 0.6s;
-//   transform-style: preserve-3d;
-
-//   ${({ flipped }) =>
-//     flipped &&
-//     `
-//   transform: rotateX(180deg);
-// `}
-// `;
-
-export const CardContainer = styled.div`
-  box-sizing: border-box;
-  width: 534px;
-  height: 334px;
-  position: relative;
-  perspective: 1000px;
+  width: 86px;
+  height: 86px;
+  background-image: ${({ card }) =>
+    card === "visa" ? "url(/visa.svg)" : "url(/Mastercard.svg)"};
+  background-repeat: no-repeat;
+  background-size: contain;
 `;
 
-export const OneCard = styled.div`
-  width: 300px;
-  height: 200px;
-  position: relative;
-  transition: transform 0.6s;
-  transform-style: preserve-3d;
-
-  ${({ flipped }) =>
-    flipped &&
-    `
-    transform: rotateY(180deg);
-  `}
+export const CardFlex = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 `;
 
-export const Sides = styled.div`
+export const CardRectangle = styled.div`
   position: absolute;
-  backface-visibility: hidden;
+  left: 0%;
+  right: 0%;
+  top: 9.58%;
+  bottom: 71.56%;
 
-  ${({ isBack }) =>
-    isBack &&
-    `
-    transform: rotateY(180deg);
-  `}
-
-  z-index: auto;
-
-  position: relative;
-  /* background-color: grey; */
-  border-radius: 48.6px;
-  backface-visibility: hidden;
-  &:not(:last-child) {
-    margin-bottom: 90px;
-  }
-`;
-
-export const SideFront = styled(Sides)`
-  background-color: #f8f8f8;
-`;
-
-export const SideBack = styled(Sides)`
-  background-color: #ccc;
-  transform: rotateY(180deg);
+  background: #161039;
 `;
