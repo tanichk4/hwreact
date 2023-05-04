@@ -1,18 +1,7 @@
 import styled from "styled-components";
 
-export const IntroductionCard = styled.div`
-  position: relative;
-  z-index: 2;
-  margin: auto;
-
-  &:not(:last-child) {
-    margin-bottom: ${({ showStatistics }) =>
-      showStatistics ? "1000px" : "100px"};
-  }
-`;
-
-export const CardInner = styled.div`
-  position: relative;
+export const StatisticsInner = styled.div`
+  position: absolute;
   z-index: 10;
 
   width: 100%;
@@ -25,20 +14,18 @@ export const CardInner = styled.div`
 `}
 `;
 
-export const Card = styled.div`
-  width: 534px;
+export const Statistics = styled.div`
+  width: 520px;
   height: 334px;
   perspective: 1200px;
   ${(props) =>
     props.showStatistics &&
     `width: 534px;
-    height: 202px;
+    height: auto;
 `}
-  /* transition: height 0.1s ease-in-out; */
-  transition: height 0.3s ease-in-out;
 `;
 
-export const CardFront = styled.div`
+export const StatisticsFront = styled.div`
   border-radius: 48.6px;
   padding: 55px;
   display: flex;
@@ -49,15 +36,14 @@ export const CardFront = styled.div`
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  background: #b08ead;
-  color: white;
+  background: #fbfbff;
 
   & p {
     top: calc(50% - 31px / 2 + 85.63px);
   }
 `;
 
-export const CardBack = styled.div`
+export const StatisticsBack = styled.div`
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
