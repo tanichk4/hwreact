@@ -12,7 +12,6 @@ const CardsProvider = ({ children }) => {
     fetch(BASE_URL)
       .then((res) => res.json())
       .then((res) => {
-        // console.log({ res })
         setData([res]);
         setUsers([...users, data]);
       });

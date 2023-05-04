@@ -56,15 +56,14 @@ export const ButtonContainer = styled.div`
   z-index: -1;
   bottom: -70px;
   position: absolute;
-  display: flex;
+  display: ${(props) => (props.showStatistics ? "none" : "flex")};
   justify-content: space-evenly;
   align-items: stretch;
   width: 534px;
-  height: 100px;
+  height: ${(props) => (props.showStatistics ? "100px" : "100px")};
   border-radius: 48.6px;
   background-color: #dcdce3;
   animation: ${slideInAnimation} 0.5s ease-out;
-
 `;
 
 export const Button = styled.button`
@@ -116,6 +115,7 @@ export const ButtonFlip = styled(Button)`
 `;
 
 export const CardChip = styled.div`
+  display: ${(props) => (props.showStatistics ? "none" : "block")};
   background-image: url("/chip.svg");
   background-size: cover;
   width: 69.6px;
@@ -135,8 +135,11 @@ export const LogoContainer = styled.div`
   left: 411.6px;
   top: calc(50% - 31px/2 + 85.63px); */
 
-  width: 86px;
+  /* width: 86px; */
   height: 86px;
+
+  width: ${({ card }) => (card === "visa" ? "88px" : "70px")};
+  height: ${({ card }) => (card === "visa" ? "88px" : "42px")};
   background-image: ${({ card }) =>
     card === "visa" ? "url(/visa.svg)" : "url(/Mastercard.svg)"};
   background-repeat: no-repeat;
@@ -158,4 +161,34 @@ export const CardRectangle = styled.div`
   bottom: 71.56%;
 
   background: #161039;
+`;
+
+export const Statistics = styled.div`
+  box-sizing: border-box;
+  position: absolute;
+
+  width: 534px;
+  height: auto;
+  padding: 120px 40px 40px;
+  background: #fbfbff;
+  border-radius: 48.6px;
+  z-index: -10;
+  top: 100px;
+  & div {
+    align-self: flex-start;
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+  }
+`;
+
+export const StatsItem = styled.div``;
+
+export const BackArrow = styled.div`
+  cursor: pointer;
+  background-image: url("/backarrow.svg");
+  width: 50px;
+  height: 50px;
 `;
