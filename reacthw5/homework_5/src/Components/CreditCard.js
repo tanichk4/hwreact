@@ -1,16 +1,23 @@
 import React, { useContext, useState } from "react";
 
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
-import { BackArrow, InfoTitle, InfoContainer, PageContainer, FormButton } from "./Styles";
+import {
+  BackArrow,
+  InfoTitle,
+  InfoContainer,
+  PageContainer,
+  FormButton,
+} from "./Styles";
 import { CardsContext } from "./UseFetch";
 
 const CreditCard = () => {
-  const [cardNumber, setCardNumber] = useState("");
+  const [numbers, setNumbers] = useState("");
   const [cvv, setCvv] = useState("");
-  const [fullName, setFullName] = useState("");
-  const [cardType, setCardType] = useState("");
+  const [user_name, setUser_name] = useState("");
+  const [type, setType] = useState("");
 
-  // const [users, setUsers] = useContext(CardsContext);
+  const { data } = useContext(CardsContext);
+  const [users, setUsers] = useState(data);
 
   const navigate = useNavigate();
 
@@ -19,7 +26,7 @@ const CreditCard = () => {
   }
 
   const handleCardNumberChange = (event) => {
-    setCardNumber(event.target.value);
+    setNumbers(event.target.value);
   };
 
   const handleCvvChange = (event) => {
@@ -27,28 +34,36 @@ const CreditCard = () => {
   };
 
   const handleFullNameChange = (event) => {
-    setFullName(event.target.value);
+    setUser_name(event.target.value);
   };
 
   const handleCardTypeChange = (event) => {
-    setCardType(event.target.value);
+    setType(event.target.value);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // const newUser = {
-    //   cardNumber: cardNumber,
-    //   cvv: cvv,
-    //   fullName: fullName,
-    //   cardType: cardType,
-    // };
+    const newUser = {
+      numbers: numbers,
+      cvv: cvv,
+      user_name: user_name,
+      type: type,
+    };
 
-    // setUsers([...users, newUser]);
-    // setCardNumber("");
-    // setCvv("");
-    // setFullName("");
-    // setCardType("");
+    setUsers((prevUsers) => {
+      const newUsers = [...prevUsers, newUser];
+      console.log("newUser", newUser);
+      console.log("users", newUsers);
+      return newUsers;
+    });
 
+    console.log("newUser", newUser);
+    console.log("users", users);
+
+    setNumbers("");
+    setCvv("");
+    setUser_name("");
+    setType("");
   };
 
   const inputFields = [
@@ -56,8 +71,8 @@ const CreditCard = () => {
       id: 1,
       title: "Card number",
       placeholder: "Enter card number",
-      name: "cardNumber",
-      value: cardNumber,
+      name: "numbers",
+      value: numbers,
       onChange: handleCardNumberChange,
     },
     {
@@ -70,18 +85,18 @@ const CreditCard = () => {
     },
     {
       id: 3,
-      title: "Your fullname",
+      title: "Your full name",
       placeholder: "Enter full name",
-      name: "fullName",
-      value: fullName,
+      name: "user_name",
+      value: user_name,
       onChange: handleFullNameChange,
     },
     {
       id: 4,
       title: "VISA or MASTERCARD",
       placeholder: "Enter card type",
-      name: "cardType",
-      value: cardType,
+      name: "type",
+      value: type,
       onChange: handleCardTypeChange,
     },
   ];

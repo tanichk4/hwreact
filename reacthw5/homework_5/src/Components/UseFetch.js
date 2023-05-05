@@ -15,8 +15,6 @@ const CardsProvider = ({ children }) => {
         setData([res]);
         setUsers([...users, data]);
       });
-    console.log(users);
-    console.log(data);
   }, []);
 
   return (
