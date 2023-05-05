@@ -17,8 +17,12 @@ const CardsProvider = ({ children }) => {
       });
   }, []);
 
+  const updateData = (newData) => {
+    setData(newData);
+  };
+
   return (
-    <CardsContext.Provider value={{ data }}>{children}</CardsContext.Provider>
+    <CardsContext.Provider value={{ data, updateData }}>{children}</CardsContext.Provider>
   );
 };
 

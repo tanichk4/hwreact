@@ -16,7 +16,8 @@ const CreditCard = () => {
   const [user_name, setUser_name] = useState("");
   const [type, setType] = useState("");
 
-  const { data } = useContext(CardsContext);
+  const { data, updateData } = useContext(CardsContext);
+
   const [users, setUsers] = useState(data);
 
   const navigate = useNavigate();
@@ -49,6 +50,17 @@ const CreditCard = () => {
       user_name: user_name,
       type: type,
     };
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const newData = [...data, { numbers, cvv, user_name, type }];
+  //   updateData(newData);
+  //   setNumbers("");
+  //   setCvv("");
+  //   setUser_name("");
+  //   setType("");
+  // };
+  
 
     setUsers((prevUsers) => {
       const newUsers = [...prevUsers, newUser];
