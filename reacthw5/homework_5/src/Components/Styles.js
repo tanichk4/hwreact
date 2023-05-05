@@ -189,6 +189,11 @@ export const StatsItem = styled.div``;
 export const BackArrow = styled.div`
   cursor: pointer;
   background-image: url("/backarrow.svg");
-  width: 50px;
-  height: 50px;
+  width: 47px;
+  height: 47px;
 `;
+
+export const FormButton = styled.button`
+border:none;
+cursor: pointer;
+`

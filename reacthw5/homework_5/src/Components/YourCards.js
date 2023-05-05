@@ -6,24 +6,25 @@ import { Card } from "./Card.js";
 
 const YourCards = () => {
   const { data } = useContext(CardsContext);
+
   return (
     <div>
       <PageContainer>
         <InfoContainer>
           <InfoTitle>Your Cards</InfoTitle>
-          <Link to="/addcard">
+          <Link to="/newuser">
             <InfoIcon />
           </Link>
         </InfoContainer>
         {data.map(({ user_name, data }) => {
-          return data.map(({ id, card, statistic }) =>
-              <Card
-                owner={user_name}
-                statistic={statistic}
-                stats={statistic.stats}
-                card={card}
-              />
-          );
+          return data.map(({ card, statistic }) => (
+            <Card
+              owner={user_name}
+              statistic={statistic}
+              stats={statistic.stats}
+              card={card}
+            />
+          ));
         })}
       </PageContainer>
     </div>
