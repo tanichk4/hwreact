@@ -19,8 +19,4 @@ code {
   margin: 0;
 }
 
-form label,
-form div,
-form input {
-  color: rgba(0, 0, 0, 0.44);
-}
+

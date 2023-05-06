@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components";
-
+import { Formik, Form, Field, ErrorMessage } from "formik";
 export const PageContainer = styled.div`
   align-self: flex-start;
   position: relative;
@@ -194,6 +194,78 @@ export const BackArrow = styled.div`
 `;
 
 export const FormButton = styled.button`
-border:none;
-cursor: pointer;
-`
+  border: none;
+  cursor: pointer;
+  width: 514px;
+  height: 76px;
+  background: #aa24e9;
+  border-radius: 25px;
+  color: white;
+  font-family: "Abel";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 38px;
+  letter-spacing: 4.17391px;
+  color: #ffffff;
+  margin-top: 85px;
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: #f2f2f2;
+    color: rgba(0, 0, 0, 0.44);
+  }
+`;
+
+export const RegisterForm = styled(Form)`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
+
+export const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: red;
+  box-sizing: border-box;
+
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+`;
+
+export const RegisterLabel = styled.label`
+  font-size: 30px;
+  line-height: 38px;
+  letter-spacing: 4.17391px;
+  margin: 5px;
+  color: rgba(1, 0, 0, 1);
+`;
+
+export const RegisterField = styled(Field)`
+  background: #e7d7ef;
+  border-radius: 25px;
+  border: none;
+  width: 514px;
+  height: 76px;
+  font-family: "Abel";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 38px;
+  letter-spacing: 4.17391px;
+  color: rgba(0, 0, 0, 0.44);
+  &::placeholder {
+    padding: 19px 436px 19px 23px;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+`;
+
+export const RegisterOption = styled.option``;
+
+export const RegisterErrorMessage = styled(ErrorMessage)``;

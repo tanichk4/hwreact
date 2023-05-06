@@ -13,9 +13,10 @@ const CardsProvider = ({ children }) => {
       .then((res) => res.json())
       .then((res) => {
         setData([res]);
-        setUsers([...users, data]);
+        setUsers([...users, [res]]);
       });
   }, []);
+  
 
   const updateData = (newData) => {
     setData(newData);

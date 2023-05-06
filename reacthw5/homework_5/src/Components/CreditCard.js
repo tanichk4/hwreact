@@ -1,5 +1,4 @@
-import React, { useContext, useState } from "react";
-
+import React, { useContext, useEffect } from "react";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import {
   BackArrow,
@@ -7,18 +6,19 @@ import {
   InfoContainer,
   PageContainer,
   FormButton,
+  RegisterForm,
+  RegisterLabel,
+  InputContainer,
+  RegisterField,
+  RegisterErrorMessage,
 } from "./Styles";
 import { CardsContext } from "./UseFetch";
+import { Formik, ErrorMessage } from "formik";
+import * as yup from "yup";
 
 const CreditCard = () => {
-  const [numbers, setNumbers] = useState("");
-  const [cvv, setCvv] = useState("");
-  const [user_name, setUser_name] = useState("");
-  const [type, setType] = useState("");
 
   const { data, updateData } = useContext(CardsContext);
-
-  const [users, setUsers] = useState(data);
 
   const navigate = useNavigate();
 
@@ -26,92 +26,35 @@ const CreditCard = () => {
     navigate(-1);
   }
 
-  const handleCardNumberChange = (event) => {
-    setNumbers(event.target.value);
+  const initialValues = {
+    numbers: "",
+    cvv: "",
+    user_name: "",
+    type: "",
   };
 
-  const handleCvvChange = (event) => {
-    setCvv(event.target.value);
+  const onSubmit = (values, { resetForm }) => {
+    const newData = [...data, values];
+    updateData(newData);
+    resetForm(initialValues);
+    console.log(data);
+    console.log(newData);
   };
 
-  const handleFullNameChange = (event) => {
-    setUser_name(event.target.value);
-  };
-
-  const handleCardTypeChange = (event) => {
-    setType(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const newUser = {
-      numbers: numbers,
-      cvv: cvv,
-      user_name: user_name,
-      type: type,
-    };
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const newData = [...data, { numbers, cvv, user_name, type }];
-  //   updateData(newData);
-  //   setNumbers("");
-  //   setCvv("");
-  //   setUser_name("");
-  //   setType("");
-  // };
-  
-
-    setUsers((prevUsers) => {
-      const newUsers = [...prevUsers, newUser];
-      console.log("newUser", newUser);
-      console.log("users", newUsers);
-      return newUsers;
-    });
-
-    console.log("newUser", newUser);
-    console.log("users", users);
-
-    setNumbers("");
-    setCvv("");
-    setUser_name("");
-    setType("");
-  };
-
-  const inputFields = [
-    {
-      id: 1,
-      title: "Card number",
-      placeholder: "Enter card number",
-      name: "numbers",
-      value: numbers,
-      onChange: handleCardNumberChange,
-    },
-    {
-      id: 2,
-      title: "CVV",
-      placeholder: "Enter CVV",
-      name: "cvv",
-      value: cvv,
-      onChange: handleCvvChange,
-    },
-    {
-      id: 3,
-      title: "Your full name",
-      placeholder: "Enter full name",
-      name: "user_name",
-      value: user_name,
-      onChange: handleFullNameChange,
-    },
-    {
-      id: 4,
-      title: "VISA or MASTERCARD",
-      placeholder: "Enter card type",
-      name: "type",
-      value: type,
-      onChange: handleCardTypeChange,
-    },
-  ];
+  const validationSchema = yup.object({
+    numbers: yup
+      .string()
+      .matches(/^\d+$/, "Only digits allowed")
+      .matches(/^[0-9]{13}$|^[0-9]{16}$/, "Card number must be 13 or 16 digits")
+      .required("Required"),
+    cvv: yup
+      .string()
+      .matches(/^\d+$/, "Only digits allowed")
+      .matches(/^[0-9]{3}$/, "CVV must be 3 digits")
+      .required("Required"),
+    user_name: yup.string().required("Required"),
+    type: yup.string().required("Required"),
+  });
 
   return (
     <div>
@@ -120,24 +63,63 @@ const CreditCard = () => {
           <InfoTitle>Create a new card</InfoTitle>
           <BackArrow onClick={handleClick} />
         </InfoContainer>
-        <form onSubmit={handleSubmit}>
-          {inputFields.map((field) => (
-            <div key={field.name}>
-              <label htmlFor={field.name}>{field.title}</label>
-              <input
-                type="text"
-                id={field.id}
-                name={field.name}
-                placeholder={field.placeholder}
-                value={field.value}
-                onChange={field.onChange}
-              />
-            </div>
-          ))}
-          <FormButton>Add card</FormButton>
-        </form>
+        <Formik
+          initialValues={initialValues}
+          onSubmit={onSubmit}
+          validationSchema={validationSchema}
+        >
+          {({ isValid, isSubmitting }) => (
+            <RegisterForm>
+              <InputContainer>
+                <RegisterLabel htmlFor="numbers">Card number</RegisterLabel>
+                <RegisterField
+                  type="text"
+                  id="numbers"
+                  name="numbers"
+                  placeholder="0888008800005569"
+                />
+                <RegisterErrorMessage name="numbers" />
+              </InputContainer>
+              <InputContainer>
+                <RegisterLabel htmlFor="cvv">CVV</RegisterLabel>
+                <RegisterField
+                  type="text"
+                  id="cvv"
+                  name="cvv"
+                  placeholder="123"
+                />
+                <ErrorMessage name="cvv" />
+              </InputContainer>
+              <InputContainer>
+                <RegisterLabel htmlFor="user_name">
+                  Your full name
+                </RegisterLabel>
+                <RegisterField
+                  type="text"
+                  id="user_name"
+                  name="user_name"
+                  placeholder="John Snow"
+                />
+                <ErrorMessage name="user_name" />
+              </InputContainer>
+              <InputContainer>
+                <RegisterLabel htmlFor="type">VISA or MASTERCARD</RegisterLabel>
+                <RegisterField as="select" id="type" name="type">
+                  <option value="">Select card type</option>
+                  <option value="VISA">VISA</option>
+                  <option value="MASTERCARD">MASTERCARD</option>
+                </RegisterField>
+              </InputContainer>
+              <ErrorMessage name="type" />
+              <FormButton type="submit" disabled={!isValid}>
+                Add card
+              </FormButton>
+            </RegisterForm>
+          )}
+        </Formik>
       </PageContainer>
     </div>
   );
 };
+
 export default CreditCard;
